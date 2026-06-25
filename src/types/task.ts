@@ -16,6 +16,16 @@ export interface TodoFormSubmitProps {
     onSubmit: (title: string, description?: string) => void;
 }
 
+export interface TodoListProps {
+    tasks: TasksProps[];
+    ToggleTask: (id: string) => void;
+    DeleteTask: (id: string) => void;
+    EditTask: (
+        id: string,
+        title: string,
+        description?: string
+    ) => void;
+}
 
 export interface TodoItemProps {
     task: TasksProps;
