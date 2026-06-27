@@ -1,0 +1,178 @@
+/* ESTILO DE LA PAGINA DE TASKS */
+.task-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+/* ESTILO DEL BOTON AGREGAR TAREA DEL INICIO */
+.btn-add-task {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    width: 70%;
+    max-width: 900px;
+
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+
+    background: #2563EB;
+    color: white;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
+    transition: background .2s ease,
+        transform .15s ease,
+        box-shadow .2s ease;
+}
+
+.btn-add-task:hover {
+    background: #1D4ED8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .16);
+}
+
+.btn-add-task:active {
+    transform: scale(.98);
+}
+
+/* ESTILO DE LA LISTA DE TAREAS */
+
+.tasks-list {
+    width: 70%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* ESTILO DE CADA TAREA */
+.task-item {
+    width: 100%;
+    /* 👈 ocupa todo el contenedor */
+    max-width: none;
+    /* 👈 elimina el límite */
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 8px 14px;
+    margin: 4px 0;
+
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+
+    box-sizing: border-box;
+}
+
+/* checkbox + titulo en la misma fila */
+.task-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+/* título */
+.task-title {
+    flex: 1;
+    min-width: 0;
+    line-height: 1.3;
+
+    white-space: normal;
+    /* 👈 permite salto de línea */
+    overflow-wrap: anywhere;
+    /* 👈 rompe palabras largas */
+    word-break: break-word;
+    /* 👈 fallback */
+}
+
+/* descripción separada */
+.task-description p {
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+/* botones abajo en fila */
+.task-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+
+/* ESTILO DEL FORMULARIO DE TAREA */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
+}
+
+.task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    width: 100%;
+    max-width: 500px;
+
+    padding: 16px;
+    border-radius: 8px;
+
+    background-color: #f9f9f9;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.task-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    color: #333;
+    gap: 4px;
+}
+
+.task-form input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.task-form input:focus {
+    outline: none;
+    border-color: #666;
+}
+
+.task-form button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #333;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.task-form button:hover {
+    background-color: #555;
+}

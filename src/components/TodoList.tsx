@@ -11,8 +11,8 @@ function TodoList({
     EditTask
 }: TodoListProps) {
     return (
-        <div>
-            {tasks.map(task => (
+        <div className="tasks-list">
+            {tasks.slice().reverse().map(task => (
                 <TodoItem
                     key={task.id}
                     task={task}

@@ -18,13 +18,13 @@ function useTasks() {
     }
 
     // funcion para editar tarea
-    const EditTask = (id: string, title: string, description?: string) => {
+    const EditTask = (task: TasksProps) => {
         setTasks(oldTasks =>
-            oldTasks.map(task =>
-                task.id === id ? { ...task, title, description } : task
+            oldTasks.map(t =>
+                t.id === task.id ? { ...t, ...task } : t
             )
-        )
-    }
+        );
+    };
 
     // funcion para eliminar tarea
     const DeleteTask = (id: string) => {
@@ -37,7 +37,7 @@ function useTasks() {
     const ToggleTask = (id: string) => {
         setTasks(oldTasks =>
             oldTasks.map(task =>
-                task.id === id ? { ...task, complete: !task.completed } : task
+                task.id === id ? { ...task, completed: !task.completed } : task
             )
         )
     }
