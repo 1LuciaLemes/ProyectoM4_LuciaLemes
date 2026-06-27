@@ -1,0 +1,83 @@
+.login-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f4f6f8;
+    font-family: Arial, sans-serif;
+}
+
+.login-container form {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 320px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.login-container label {
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+    margin-top: 0.8rem;
+    color: #555;
+}
+
+.login-container input {
+    padding: 0.6rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.login-container input:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.login-container button {
+    margin-top: 1rem;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+/* Botón principal */
+.login-container button[type="submit"] {
+    background: #4a90e2;
+    color: white;
+}
+
+.login-container button[type="submit"]:hover {
+    background: #3b7dc4;
+}
+
+/* Botón Google */
+.google-btn {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    color: #444;
+}
+
+.google-btn:hover {
+    background: #f1f1f1;
+}
+
+/* Error */
+.login-container p[role="alert"] {
+    margin-top: 1rem;
+    color: #e74c3c;
+    font-size: 0.85rem;
+    text-align: center;
+}

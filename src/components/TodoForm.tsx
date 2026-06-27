@@ -51,8 +51,12 @@ function TodoForm({ onSubmit, onCancel, initialData, mode = "create" }: TodoForm
 
     return (
         <form onSubmit={handleSubmit} className="task-form">
+            <label htmlFor="text">Titulo</label>
             <input name="title" value={form.title} onChange={handleChange} placeholder="Titulo" />
+
+            <label htmlFor="text">Descripción</label>
             <input name="description" value={form.description} onChange={handleChange} placeholder="Descripción" />
+
             <div className="form-actions">
                 <button type="submit">
                     {mode === "edit" ? "Guardar Cambios" : "Agregar nueva tarea"}

@@ -1,13 +1,26 @@
 // Pantalla principal de tareas conecta la logica del hook
 // con la visual (UI) de components
 
-import TodoList from "../components/TodoList"
-import useTasks from "../hooks/useTasks"
-import TodoForm from "../components/TodoForm";
+import TodoList from "../../components/TodoList"
+import useTasks from "../../hooks/useTasks"
+import TodoForm from "../../components/TodoForm";
 import { useState } from "react";
-import type { TasksProps } from "../types/task";
+import type { TasksProps } from "../../types/task";
+import { useAuth } from "../../features/auth/Authenticator";
+import { useNavigate } from "react-router-dom";
+import type { JSX } from "react";
 
-function Tasks() {
+function Tasks(): JSX.Element {
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
+
+    async function handleLogout(): Promise<void> {
+        await logout();
+        navigate("/login");
+    }
+
+    const initialLetter = user?.email?.charAt(0).toUpperCase() || "U"
+
     const { tasks, ToggleTask, DeleteTask, EditTask, AddTask } = useTasks();
 
     // estado para mostrar el formulario solo si: Quiero agregar tarea / Quiero editar tarea
@@ -45,6 +58,9 @@ function Tasks() {
 
     return (
         <div className="task-page">
+            <div>
+                {initialLetter}
+            </div>
             <button
                 className="btn-add-task"
                 onClick={handleBtnAddTask}>
@@ -72,6 +88,7 @@ function Tasks() {
                 DeleteTask={DeleteTask}
                 EditTask={handleEdit}
             />
+            <button onClick={handleLogout}>Cerrar sesión</button>
         </div>
     );
 }
