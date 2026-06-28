@@ -1,53 +1,86 @@
 // este archivo procesa datos recibidos
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { TasksProps } from "../types/task";
+import { collection, serverTimestamp, addDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { db } from "../services/firebase";
+import getTasksByUser from "../services/tasks";
 
-function useTasks() {
-    // estado de las tareas
+
+function useTasks(userId?: string) {
     const [tasks, setTasks] = useState<TasksProps[]>([]);
 
-    // funcion para añadir tarea
-    const AddTask = (title: string, description?: string) => {
-        const newTask = {
-            id: crypto.randomUUID(),
+    // tengo que sincronizar el estado con fuentes externas usando useEffect
+    useEffect(() => {
+        if (!userId) return;
+
+        async function loadTasks() {
+            const data = await getTasksByUser(userId);
+            setTasks(data);
+        }
+
+        loadTasks();
+    }, [userId]);
+
+    // Añadir tarea
+    async function addTask(title: string, userId: string, description?: string) {
+        const docRef = await addDoc(collection(db, "tasks"), {
+            userId,
             title,
             description,
-            completed: false
-        }
-        setTasks(oldTasks => [...oldTasks, newTask])
+            completed: false,
+            createdAt: serverTimestamp()
+        });
+
+        const data = await getTasksByUser(userId);
+        setTasks(data);
+        return docRef.id;
     }
 
-    // funcion para editar tarea
-    const EditTask = (task: TasksProps) => {
-        setTasks(oldTasks =>
-            oldTasks.map(t =>
-                t.id === task.id ? { ...t, ...task } : t
-            )
-        );
-    };
+    // editar titulo y/o descripcion
+    async function editTask(task: TasksProps) {
+        // referencia al documento usando doc()
+        const taskRef = doc(db, "tasks", task.id);
 
-    // funcion para eliminar tarea
-    const DeleteTask = (id: string) => {
-        setTasks(oldTasks =>
-            oldTasks.filter(task => task.id !== id)
-        )
+        // campo que quiero cambiar
+        await updateDoc(taskRef, {
+            title: task.title,
+            description: task.description
+        });
+
+        const data = await getTasksByUser(userId);
+        setTasks(data);
     }
 
-    // funcion para tarea completada o no
-    const ToggleTask = (id: string) => {
-        setTasks(oldTasks =>
-            oldTasks.map(task =>
-                task.id === id ? { ...task, completed: !task.completed } : task
-            )
-        )
+    // eliminar tarea
+    async function deleteTask(taskId: string) {
+        const taskRef = doc(db, "tasks", taskId);
+
+        await deleteDoc(taskRef);
+
+        const data = await getTasksByUser(userId);
+        setTasks(data);
+    }
+
+
+    // tarea completada o no
+    async function toggleTaskStatus(taskId: string) {
+        const task = tasks.find(t => t.id === taskId);
+        if (!task) return;
+
+        await updateDoc(doc(db, "tasks", taskId), {
+            completed: !task.completed
+        });
+
+        const data = await getTasksByUser(userId);
+        setTasks(data);
     }
 
     return {
         tasks,
-        AddTask,
-        EditTask,
-        DeleteTask,
-        ToggleTask
+        addTask,
+        editTask,
+        toggleTaskStatus,
+        deleteTask
     }
 }
 

@@ -21,7 +21,7 @@ function Tasks(): JSX.Element {
 
     const initialLetter = user?.email?.charAt(0).toUpperCase() || "U"
 
-    const { tasks, ToggleTask, DeleteTask, EditTask, AddTask } = useTasks();
+    const { tasks, addTask, editTask, deleteTask, toggleTaskStatus } = useTasks(user?.uid);
 
     // estado para mostrar el formulario solo si: Quiero agregar tarea / Quiero editar tarea
     const [showForm, setShowForm] = useState(false);
@@ -39,13 +39,13 @@ function Tasks(): JSX.Element {
     // si hay una tarea a editar, la actualiza, sino creo una nueva
     function handleSubmit(title: string, description: string) {
         if (taskToEdit) {
-            EditTask({
+            editTask({
                 ...taskToEdit,
                 title,
                 description
             });
         } else {
-            AddTask(title, description);
+            addTask(title, user!.uid, description);
         }
         setShowForm(false);
     }
@@ -84,8 +84,8 @@ function Tasks(): JSX.Element {
             )}
             <TodoList
                 tasks={tasks}
-                ToggleTask={ToggleTask}
-                DeleteTask={DeleteTask}
+                ToggleTask={toggleTaskStatus}
+                DeleteTask={deleteTask}
                 EditTask={handleEdit}
             />
             <button onClick={handleLogout}>Cerrar sesión</button>

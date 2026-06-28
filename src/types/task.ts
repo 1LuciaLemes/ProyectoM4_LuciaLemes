@@ -1,10 +1,12 @@
 // Definición de qué es una tarea
+import { Timestamp } from "firebase/firestore";
 
 export interface TasksProps {
     id: string;
     title: string;
     description?: string;
     completed: boolean;
+    createdAt: Timestamp;
 }
 
 export interface TodoFormProps {
