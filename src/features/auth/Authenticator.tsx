@@ -9,13 +9,14 @@ import {
     onAuthStateChanged,
     type User,
     type UserCredential,
+    updateProfile
 } from "firebase/auth";
 import type { JSX } from "react";
 
 interface AuthContextValue {
     user: User | null;
     loading: boolean;
-    signUp: (email: string, password: string) => Promise<UserCredential>;
+    signUp: (email: string, password: string, name: string) => Promise<UserCredential>;
     signIn: (email: string, password: string) => Promise<UserCredential>;
     signInWithGoogle: () => Promise<UserCredential>;
     logout: () => Promise<void>;
@@ -37,8 +38,17 @@ export function Authenticator({ children }: { children: ReactNode }): JSX.Elemen
         return () => unsubscribe();
     }, []);
 
-    const signUp = (email: string, password: string) =>
-        createUserWithEmailAndPassword(auth, email, password);
+    const signUp = async (email: string, password: string, name: string): Promise<UserCredential> => {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+        const user = userCredential.user;
+
+        await updateProfile(user, {
+            displayName: name,
+        });
+
+        return userCredential;
+    };
     const signIn = (email: string, password: string) =>
         signInWithEmailAndPassword(auth, email, password);
     const signInWithGoogle = () =>

@@ -58,10 +58,14 @@ function TodoForm({ onSubmit, onCancel, initialData, mode = "create" }: TodoForm
             <input name="description" value={form.description} onChange={handleChange} placeholder="Descripción" />
 
             <div className="form-actions">
-                <button type="submit">
+                <button
+                    className="btn-primary"
+                    type="submit">
                     {mode === "edit" ? "Guardar Cambios" : "Agregar nueva tarea"}
                 </button>
-                <button type="button" onClick={onCancel}>
+                <button
+                    className="btn-secondary"
+                    type="button" onClick={onCancel}>
                     {mode === "edit" ? "Cancelar edición" : "Cancelar"}
                 </button>
             </div>

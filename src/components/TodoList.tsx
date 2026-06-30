@@ -12,7 +12,7 @@ function TodoList({
 }: TodoListProps) {
     return (
         <div className="tasks-list">
-            {tasks.slice().reverse().map(task => (
+            {tasks.map(task => (
                 <TodoItem
                     key={task.id}
                     task={task}
@@ -22,6 +22,7 @@ function TodoList({
                 />
             ))}
         </div>
+        /* estado cargando para cuando logueo*/
     );
 }
 

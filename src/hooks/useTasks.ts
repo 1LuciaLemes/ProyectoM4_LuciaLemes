@@ -9,7 +9,8 @@ import getTasksByUser from "../services/tasks";
 function useTasks(userId?: string) {
     const [tasks, setTasks] = useState<TasksProps[]>([]);
 
-    // tengo que sincronizar el estado con fuentes externas usando useEffect
+    // cargar las tareas cuando cambio de usuario
+    // uso useEffect porque traerlas de firestone es un efecto secundario (sE)
     useEffect(() => {
         if (!userId) return;
 

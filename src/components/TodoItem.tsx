@@ -1,15 +1,19 @@
 // Tarea como un solo item
 import type { TodoItemProps } from "../types/task";
+import { X, Pen } from "lucide-react";
 
 function TodoItem({ task, onToggle, onDelete, onEdit }: TodoItemProps) {
+
     return (
         <div className="task-item">
             <div className="task-header">
-                <input
-                    type="checkbox"
-                    checked={task.completed}
-                    onChange={() => onToggle(task.id)}
-                />
+                <label className="checkbox">
+                    <input
+                        type="checkbox"
+                        checked={task.completed}
+                        onChange={() => onToggle(task.id)}
+                    />
+                </label>
 
                 <span
                     className="task-title"
@@ -28,12 +32,20 @@ function TodoItem({ task, onToggle, onDelete, onEdit }: TodoItemProps) {
             )}
 
             <div className="task-item-actions">
-                <button onClick={() => onEdit(task)}>
-                    Editar
+                <button
+                    className="icon-btn edit"
+                    onClick={() => onEdit(task)}
+                    aria-label="Editar tarea"
+                >
+                    <Pen />
                 </button>
 
-                <button onClick={() => onDelete(task.id)}>
-                    Eliminar
+                <button
+                    className="icon-btn delete"
+                    onClick={() => onDelete(task.id)}
+                    aria-label="Eliminar tarea"
+                >
+                    <X />
                 </button>
             </div>
         </div>

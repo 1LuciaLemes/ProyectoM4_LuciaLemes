@@ -9,17 +9,22 @@ import type { TasksProps } from "../../types/task";
 import { useAuth } from "../../features/auth/Authenticator";
 import { useNavigate } from "react-router-dom";
 import type { JSX } from "react";
+import { useTheme } from "../../utils/utils";
+import { Sun, Moon } from "lucide-react";
+
+
 
 function Tasks(): JSX.Element {
+    const { theme, toggleTheme } = useTheme();
     const { user, logout } = useAuth();
     const navigate = useNavigate();
 
     async function handleLogout(): Promise<void> {
         await logout();
-        navigate("/login");
+        navigate("/");
     }
 
-    const initialLetter = user?.email?.charAt(0).toUpperCase() || "U"
+    const name = user?.displayName || user?.email?.split("@")[0];
 
     const { tasks, addTask, editTask, deleteTask, toggleTaskStatus } = useTasks(user?.uid);
 
@@ -59,36 +64,73 @@ function Tasks(): JSX.Element {
     return (
         <div className="task-page">
             <div>
-                {initialLetter}
+                <button
+                    type="button"
+                    onClick={toggleTheme}
+                    className="theme-btn"
+                >
+                    {theme === "dark" ? (
+                        <>
+                            <Sun size={18} />
+                            <span>Modo claro</span>
+                        </>
+                    ) : (
+                        <>
+                            <Moon size={18} />
+                            <span>Modo oscuro</span>
+                        </>
+                    )}
+                </button>
             </div>
-            <button
-                className="btn-add-task"
-                onClick={handleBtnAddTask}>
-                Agregar nueva tarea
-            </button>
+            <div className="task-container">
+                <div className="page-header">
 
-            {showForm && (
-                <div className="modal-overlay" onClick={() => setShowForm(false)}>
-                    <div onClick={(e) => e.stopPropagation()}>
-                        <TodoForm
-                            onSubmit={handleSubmit}
-                            mode={taskToEdit ? "edit" : "create"}
-                            initialData={taskToEdit || undefined}
-                            onCancel={() => {
-                                setShowForm(false);
-                                setTaskToEdit(null);
-                            }}
-                        />
+                    <div className="page-info">
+                        <h1>Mis tareas</h1>
+                        <p>Hola {name}</p>
                     </div>
+
+                    {/* después aquí puede ir el botón del tema */}
+                    {/* <button className="theme-button">🌙</button> */}
+
                 </div>
-            )}
-            <TodoList
-                tasks={tasks}
-                ToggleTask={toggleTaskStatus}
-                DeleteTask={deleteTask}
-                EditTask={handleEdit}
-            />
-            <button onClick={handleLogout}>Cerrar sesión</button>
+                <button
+                    className="btn-add-task"
+                    onClick={handleBtnAddTask}>
+                    Agregar nueva tarea
+                </button>
+
+                {showForm && (
+                    <div className="modal-overlay" onClick={() => setShowForm(false)}>
+                        <div
+                            className="modal-content"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <TodoForm
+                                onSubmit={handleSubmit}
+                                mode={taskToEdit ? "edit" : "create"}
+                                initialData={taskToEdit || undefined}
+                                onCancel={() => {
+                                    setShowForm(false);
+                                    setTaskToEdit(null);
+                                }}
+                            />
+                        </div>
+                    </div>
+                )}
+                <TodoList
+                    tasks={tasks}
+                    ToggleTask={toggleTaskStatus}
+                    DeleteTask={deleteTask}
+                    EditTask={handleEdit}
+                />
+                <button
+                    className="logout-button"
+                    onClick={handleLogout}
+                >
+                    Cerrar sesión
+                </button>
+            </div>
         </div>
     );
 }

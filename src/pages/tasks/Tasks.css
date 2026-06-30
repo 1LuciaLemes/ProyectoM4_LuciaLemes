@@ -1,124 +1,296 @@
-/* ESTILO DE LA PAGINA DE TASKS */
+/* =======================
+    PAGINA TASKS
+======================= */
+
 .task-page {
-    width: 100%;
+    min-height: 100vh;
+
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 4rem 1.5rem;
+
+    background: var(--bg);
 }
 
-/* ESTILO DEL BOTON AGREGAR TAREA DEL INICIO */
-.btn-add-task {
-    display: inline-flex;
+
+/* =======================
+   CONTENEDOR PRINCIPAL
+======================= */
+
+.task-container {
+
+    width: min(600px, 95vw);
+
+    background: var(--card-bg);
+
+    border: 1px solid var(--border);
+    border-radius: 14px;
+
+    padding: 2.5rem;
+
+    box-shadow: var(--shadow);
+}
+
+
+/* =======================
+   HEADER
+======================= */
+
+.page-header {
+
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 8px;
 
-    width: 70%;
-    max-width: 900px;
+    margin-bottom: 1.8rem;
+}
 
-    padding: 12px 20px;
-    border: none;
+.page-info h1 {
+
+    margin: 0;
+
+    font-size: 1.6rem;
+    font-weight: 700;
+
+    color: var(--text);
+}
+
+.page-info p {
+
+    margin-top: .3rem;
+
+    color: var(--text-secondary);
+    font-size: .95rem;
+}
+
+
+/* =======================
+   BOTON AGREGAR TAREA
+======================= */
+
+.btn-add-task {
+
+    width: 100%;
+
+    padding: .85rem 1rem;
+
+    margin-bottom: 1.5rem;
+
+    border: 1px solid var(--primary);
+
     border-radius: 10px;
 
-    background: #2563EB;
-    color: white;
+    background: var(--primary);
 
-    font-size: 16px;
+    color: var(--card-bg);
+
+    font-size: .95rem;
     font-weight: 600;
 
     cursor: pointer;
 
-    box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
-    transition: background .2s ease,
-        transform .15s ease,
-        box-shadow .2s ease;
+    transition: .2s ease;
 }
 
 .btn-add-task:hover {
-    background: #1D4ED8;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, .16);
+    background: var(--primary-hover);
+    border-color: var(--primary-hover);
+    color: var(--text);
 }
 
-.btn-add-task:active {
-    transform: scale(.98);
+.btn-add-task:hover {
+    background: var(--bg);
 }
 
-/* ESTILO DE LA LISTA DE TAREAS */
+
+/* =======================
+   LISTA DE TAREAS
+======================= */
 
 .tasks-list {
-    width: 70%;
-    max-width: 900px;
+
     display: flex;
     flex-direction: column;
-    gap: 8px;
+
+    gap: .75rem;
 }
 
-/* ESTILO DE CADA TAREA */
+
+/* =======================
+   ITEM TAREA
+======================= */
+
 .task-item {
-    width: 100%;
-    /* 👈 ocupa todo el contenedor */
-    max-width: none;
-    /* 👈 elimina el límite */
-
     display: flex;
     flex-direction: column;
 
-    padding: 8px 14px;
-    margin: 4px 0;
+    height: 100px;
 
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
 
-    box-sizing: border-box;
+    background: var(--card-bg);
+
+    position: relative;
+
+    gap: 6px;
 }
 
-/* checkbox + titulo en la misma fila */
+.task-item:hover {
+    border-color: var(--text);
+}
+
+
+/* =======================
+   CONTENIDO DE CADA
+   TAREA
+======================= */
+
 .task-header {
     display: flex;
     align-items: center;
+
     gap: 10px;
-    width: 100%;
+
+    min-height: 28px;
 }
 
-/* título */
 .task-title {
+
+    font-size: .95rem;
+    color: var(--text);
+
     flex: 1;
-    min-width: 0;
-    line-height: 1.3;
-
-    white-space: normal;
-    /* 👈 permite salto de línea */
-    overflow-wrap: anywhere;
-    /* 👈 rompe palabras largas */
-    word-break: break-word;
-    /* 👈 fallback */
 }
 
-/* descripción separada */
-.task-description p {
-    margin: 0;
-    overflow-wrap: anywhere;
+.task-description {
+
+    margin-top: .35rem;
+    padding-left: 1.7rem;
+
+    font-size: .85rem;
+    color: var(--text-secondary);
 }
 
-/* botones abajo en fila */
-.task-actions {
+
+/*CHECKBOX*/
+
+.task-header input[type="checkbox"] {
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 16px;
+    height: 16px;
+
+    border: 1px solid var(--border);
+    border-radius: 5px;
+
+    background: var(--card-bg);
+
+    display: grid;
+    place-content: center;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.task-header input[type="checkbox"]:checked {
+
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.task-header input[type="checkbox"]:checked::after {
+
+    content: "";
+
+    width: 3px;
+    height: 7px;
+
+    border: solid var(--card-bg);
+    border-width: 0 1.5px 1.5px 0;
+
+    transform: rotate(45deg);
+}
+
+
+/* POSICION DE LAS ACCIONES DE LA TAREA*/
+
+.task-item-actions {
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
     display: flex;
-    justify-content: flex-end;
-    gap: 8px;
+    flex-direction: row;
+
+    gap: 6px;
 }
 
 
-/* ESTILO DEL FORMULARIO DE TAREA */
+/* ESTILO BOTONES EDITAR, ELIMINAR*/
+
+.icon-btn {
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    background: transparent;
+
+    color: var(--text-secondary);
+
+    cursor: pointer;
+
+    border-radius: 8px;
+
+    transition: all .15s ease;
+}
+
+.icon-btn svg {
+    width: 15px;
+    height: 15px;
+}
+
+.icon-btn:hover {
+
+    background: var(--bg);
+    color: var(--text);
+
+    transform: translateY(-1px);
+}
+
+
+/* EDIT */
+.icon-btn.edit:hover {
+    color: var(--primary);
+}
+
+
+/* DELETE */
+.icon-btn.delete:hover {
+    color: #ef4444;
+}
+
+/* =======================
+   FORMULARIO, MODAL,
+   BOTONES
+======================= */
 .modal-overlay {
+
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0;
 
-    width: 100%;
-    height: 100%;
-
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.4);
 
     display: flex;
     justify-content: center;
@@ -127,52 +299,141 @@
     z-index: 1000;
 }
 
-.task-form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+.modal-content {
 
-    width: 100%;
-    max-width: 500px;
+    width: min(420px, 92vw);
 
-    padding: 16px;
-    border-radius: 8px;
+    background: var(--card-bg);
 
-    background-color: #f9f9f9;
+    border: 1px solid var(--border);
+    border-radius: 14px;
 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+
+    box-shadow: var(--shadow);
 }
 
 .task-form label {
-    display: flex;
-    flex-direction: column;
-    font-size: 14px;
-    color: #333;
-    gap: 4px;
+    display: block;
+    margin-bottom: .3rem;
+
+    font-size: .85rem;
+    font-weight: 500;
+
+    color: var(--text-muted);
 }
 
 .task-form input {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: .75rem .85rem;
+    margin-bottom: 1rem;
+
+    border: 1px solid var(--input-border);
+    border-radius: 10px;
+
+    background: var(--input-bg);
+    color: var(--text);
+
+    font-size: .95rem;
+
+    transition: .2s ease;
+}
+
+.task-form input::placeholder {
+    color: var(--text-secondary);
 }
 
 .task-form input:focus {
+
     outline: none;
-    border-color: #666;
+
+    border-color: var(--primary);
+
+    box-shadow: 0 0 0 3px var(--input-focus);
 }
 
-.task-form button {
-    padding: 10px;
+/* BTN AGREGAR NUEVA TAREA/GUARDAR CAMBIOS EN FORM */
+.btn-primary {
+
+    width: 100%;
+
+    padding: .75rem .9rem;
+
     border: none;
-    border-radius: 4px;
-    background-color: #333;
-    color: white;
-    font-size: 14px;
+    border-radius: 10px;
+
+    background: var(--primary);
+    color: var(--card-bg);
+
+    font-size: .95rem;
+    font-weight: 600;
+
     cursor: pointer;
+
+    transition: .2s ease;
 }
 
-.task-form button:hover {
-    background-color: #555;
+.btn-primary:hover {
+    background: var(--primary-hover);
+}
+
+/* BTN CANCELAR EN FORM */
+.btn-secondary {
+
+    width: 100%;
+
+    margin-top: .5rem;
+
+    padding: .7rem .9rem;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    background: transparent;
+    color: var(--text);
+
+    font-size: .9rem;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.btn-secondary:hover {
+    background: var(--bg);
+}
+
+/* CERRAR SESION BTN */
+.logout-button {
+
+    width: 100%;
+
+    margin-top: 1.5rem;
+    padding: .75rem .9rem;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    background: transparent;
+
+    color: var(--text-secondary);
+
+    font-size: .9rem;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.logout-button:hover {
+
+    background: var(--bg);
+    color: var(--text);
+
+    border-color: rgba(17, 24, 39, .25);
 }
