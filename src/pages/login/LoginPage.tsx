@@ -92,12 +92,12 @@ function LoginPage(): JSX.Element {
                     {theme === "dark" ? (
                         <>
                             <Sun size={18} />
-                            <span>Modo claro</span>
+                            <span className="theme-text">Modo claro</span>
                         </>
                     ) : (
                         <>
                             <Moon size={18} />
-                            <span>Modo oscuro</span>
+                            <span className="theme-text">Modo oscuro</span>
                         </>
                     )}
                 </button>
@@ -112,8 +112,8 @@ function LoginPage(): JSX.Element {
                             <label htmlFor="name">Nombre</label>
                             <input
                                 id="name"
-                                type="name"
-                                placeholder="Nombre"
+                                type="text"
+                                placeholder="Lucía Lemes"
                                 value={name}
                                 onChange={e => setName(e.target.value)}
                                 required={isRegister}
@@ -126,7 +126,7 @@ function LoginPage(): JSX.Element {
                     <input
                         id="email"
                         type="email"
-                        placeholder="Email"
+                        placeholder="lucialem@email.com"
                         value={email}
                         onChange={e => {
                             setEmail(e.target.value);
@@ -139,7 +139,7 @@ function LoginPage(): JSX.Element {
                     <input
                         id="password"
                         type="password"
-                        placeholder="Contraseña"
+                        placeholder="Ingresá tu contraseña"
                         value={password}
                         onChange={e => {
                             setPassword(e.target.value);

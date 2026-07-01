@@ -10,7 +10,8 @@ import { useAuth } from "../../features/auth/Authenticator";
 import { useNavigate } from "react-router-dom";
 import type { JSX } from "react";
 import { useTheme } from "../../utils/utils";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, LogOut } from "lucide-react";
+import EmailSummaryButton from "../../components/EmailSummaryBtn";
 
 
 
@@ -26,7 +27,7 @@ function Tasks(): JSX.Element {
 
     const name = user?.displayName || user?.email?.split("@")[0];
 
-    const { tasks, addTask, editTask, deleteTask, toggleTaskStatus } = useTasks(user?.uid);
+    const { tasks, loading, addTask, editTask, deleteTask, toggleTaskStatus } = useTasks(user?.uid);
 
     // estado para mostrar el formulario solo si: Quiero agregar tarea / Quiero editar tarea
     const [showForm, setShowForm] = useState(false);
@@ -63,7 +64,7 @@ function Tasks(): JSX.Element {
 
     return (
         <div className="task-page">
-            <div>
+            <div className="page-actions">
                 <button
                     type="button"
                     onClick={toggleTheme}
@@ -72,15 +73,24 @@ function Tasks(): JSX.Element {
                     {theme === "dark" ? (
                         <>
                             <Sun size={18} />
-                            <span>Modo claro</span>
+                            <span className="theme-text">Modo claro</span>
                         </>
                     ) : (
                         <>
                             <Moon size={18} />
-                            <span>Modo oscuro</span>
+                            <span className="theme-text">Modo oscuro</span>
                         </>
                     )}
                 </button>
+
+                <button
+                    className="logout-button"
+                    onClick={handleLogout}
+                >
+                    <LogOut size={18} />
+                    <span className="logout-span">Cerrar sesión</span>
+                </button>
+
             </div>
             <div className="task-container">
                 <div className="page-header">
@@ -90,15 +100,17 @@ function Tasks(): JSX.Element {
                         <p>Hola {name}</p>
                     </div>
 
-                    {/* después aquí puede ir el botón del tema */}
-                    {/* <button className="theme-button">🌙</button> */}
-
+                    <EmailSummaryButton
+                        todos={tasks}
+                        userEmail={user!.email!}
+                    />
                 </div>
                 <button
                     className="btn-add-task"
                     onClick={handleBtnAddTask}>
                     Agregar nueva tarea
                 </button>
+
 
                 {showForm && (
                     <div className="modal-overlay" onClick={() => setShowForm(false)}>
@@ -118,18 +130,16 @@ function Tasks(): JSX.Element {
                         </div>
                     </div>
                 )}
-                <TodoList
-                    tasks={tasks}
-                    ToggleTask={toggleTaskStatus}
-                    DeleteTask={deleteTask}
-                    EditTask={handleEdit}
-                />
-                <button
-                    className="logout-button"
-                    onClick={handleLogout}
-                >
-                    Cerrar sesión
-                </button>
+                {loading ? (
+                    <p>Cargando tareas...</p>
+                ) : (
+                    <TodoList
+                        tasks={tasks}
+                        ToggleTask={toggleTaskStatus}
+                        DeleteTask={deleteTask}
+                        EditTask={handleEdit}
+                    />
+                )}
             </div>
         </div>
     );

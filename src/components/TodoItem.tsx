@@ -23,6 +23,23 @@ function TodoItem({ task, onToggle, onDelete, onEdit }: TodoItemProps) {
                 >
                     {task.title}
                 </span>
+                <div className="task-item-actions">
+                    <button
+                        className="icon-btn edit"
+                        onClick={() => onEdit(task)}
+                        aria-label="Editar tarea"
+                    >
+                        <Pen />
+                    </button>
+
+                    <button
+                        className="icon-btn delete"
+                        onClick={() => onDelete(task.id)}
+                        aria-label="Eliminar tarea"
+                    >
+                        <X />
+                    </button>
+                </div>
             </div>
 
             {task.description && (
@@ -31,23 +48,6 @@ function TodoItem({ task, onToggle, onDelete, onEdit }: TodoItemProps) {
                 </div>
             )}
 
-            <div className="task-item-actions">
-                <button
-                    className="icon-btn edit"
-                    onClick={() => onEdit(task)}
-                    aria-label="Editar tarea"
-                >
-                    <Pen />
-                </button>
-
-                <button
-                    className="icon-btn delete"
-                    onClick={() => onDelete(task.id)}
-                    aria-label="Eliminar tarea"
-                >
-                    <X />
-                </button>
-            </div>
         </div>
     )
 }

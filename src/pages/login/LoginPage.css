@@ -3,31 +3,24 @@
 ======================= */
 
 :root {
-    /* Backgrounds */
     --bg: #f9fafb;
     --card-bg: #ffffff;
 
-    /* Text */
     --text: #111827;
     --text-secondary: #6b7280;
     --text-muted: #374151;
 
-    /* Borders */
     --border: #e5e7eb;
 
-    /* Accent (GRIS OSCURO) */
     --primary: #111827;
     --primary-hover: #000000;
 
-    /* Input */
     --input-bg: #ffffff;
     --input-border: #e5e7eb;
     --input-focus: rgba(17, 24, 39, .12);
 
-    /* Shadow */
     --shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
 
-    /* SIDE BORDER */
     --side-border: rgba(17, 24, 39, .08);
 }
 
@@ -36,51 +29,85 @@
 ======================= */
 
 body.dark {
-    /* BACKGROUND LAYERS */
     --bg: #0f1117;
     --card-bg: #161a22;
     --input-bg: #1a1f2a;
 
-    /* TEXT */
     --text: #e6e8ee;
     --text-secondary: #a3aab8;
     --text-muted: #7f8796;
 
-    /* BORDERS */
     --border: #222836;
 
-    /* PRIMARY */
     --primary: #d1d5db;
     --primary-hover: #ffffff;
 
-    /* INPUT */
     --input-border: #222836;
     --input-focus: rgba(255, 255, 255, 0.08);
 
-    /* SHADOW (más suave todavía) */
     --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
 
-    /* SIDE BORDER */
     --side-border: rgba(255, 255, 255, 0.04);
 }
 
 /* =======================
-   LAYOUT
+   LAYOUT MOBILE FIRST
 ======================= */
 
 .main-container {
     min-height: 100vh;
+
+
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
 
-    align-items: flex-start;
+    align-items: center;
 
-    padding: 5rem 8% 2rem;
-    gap: 5rem;
+    padding: 2rem 1.5rem;
+    gap: 2rem;
+
     background: var(--bg);
 
-    border-left: 1px solid var(--side-border);
-    border-right: 1px solid var(--side-border);
+    position: relative;
+}
+
+/* =======================
+   THEME BUTTON (MOBILE)
+   ARRIBA DERECHA DEL TODO
+======================= */
+.theme-text {
+    width: 5.5rem;
+}
+
+.theme-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+
+    width: 40px;
+    height: 40px;
+
+    border: none;
+
+    background: transparent;
+    color: var(--text);
+
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.theme-btn:hover {
+    background: var(--bg);
+    transform: translateY(-1px);
+}
+
+.theme-text {
+    display: none;
 }
 
 /* =======================
@@ -88,23 +115,23 @@ body.dark {
 ======================= */
 
 .login-header {
-    flex: 1;
+    width: 100%;
     max-width: 600px;
 }
 
 .login-header h1 {
-    font-size: 3.2rem;
+    font-size: 2rem;
     line-height: 1.1;
     font-weight: 700;
     color: var(--text);
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
 }
 
 .login-header p {
-    font-size: 1.05rem;
+    font-size: 1rem;
     color: var(--text-secondary);
     line-height: 1.6;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .login-list {
@@ -114,17 +141,17 @@ body.dark {
 }
 
 .login-list li {
-    margin-bottom: .8rem;
-    font-size: 1rem;
+    margin-bottom: .7rem;
+    font-size: .95rem;
     color: var(--text-muted);
 }
 
 /* =======================
-   FORM
+   LOGIN CONTAINER
 ======================= */
 
 .login-container {
-    flex: 1;
+    width: 100%;
     display: flex;
     justify-content: center;
 }
@@ -132,16 +159,22 @@ body.dark {
 .login-container form {
     width: 100%;
     max-width: 380px;
+
     background: var(--card-bg);
-    padding: 2rem;
+    padding: 1.5rem;
+
     border-radius: 14px;
     border: 1px solid var(--border);
+
     box-shadow: var(--shadow);
 }
 
-/* TITLES */
+/* =======================
+   FORM
+======================= */
+
 .login-container h2 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: var(--text);
     margin-bottom: .4rem;
 }
@@ -152,7 +185,6 @@ body.dark {
     font-size: .95rem;
 }
 
-/* LABELS */
 .login-container label {
     display: block;
     margin-bottom: .3rem;
@@ -160,17 +192,21 @@ body.dark {
     color: var(--text-muted);
 }
 
-/* INPUTS */
 .login-container input {
     width: 100%;
     box-sizing: border-box;
+
     padding: .7rem .85rem;
     margin-bottom: 1rem;
+
     border: 1px solid var(--input-border);
     border-radius: 10px;
+
     font-size: 1rem;
+
     background: var(--input-bg);
     color: var(--text);
+
     transition: .2s;
 }
 
@@ -184,17 +220,21 @@ body.dark {
     box-shadow: 0 0 0 3px var(--input-focus);
 }
 
-/* PRIMARY BUTTON */
+/* BOTON INGRESAR/REGISTRARSE*/
+
 .login-container button[type="submit"] {
     width: 100%;
-    box-sizing: border-box;
     padding: .75rem;
+
     border: none;
     border-radius: 10px;
+
     background: var(--primary);
     color: var(--card-bg);
+
     font-size: 1rem;
     font-weight: 600;
+
     cursor: pointer;
     transition: .2s;
 }
@@ -203,19 +243,25 @@ body.dark {
     background: var(--primary-hover);
 }
 
-/* GOOGLE */
+/* =======================
+   GOOGLE BUTTON (FIX ICON)
+======================= */
+
 .google-btn {
     width: 100%;
-    box-sizing: border-box;
     margin-top: .7rem;
+
     padding: .75rem;
+
     border-radius: 10px;
     border: 1px solid var(--border);
+
     background: var(--card-bg);
     color: var(--text);
+
     font-weight: 500;
+
     cursor: pointer;
-    transition: .2s;
 
     display: flex;
     align-items: center;
@@ -227,26 +273,35 @@ body.dark {
     background: var(--bg);
 }
 
-/* ICON */
+/* ICON FIX */
 .google-icon {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
+    display: block;
 }
 
-/* ERROR */
+/* =======================
+   ERROR
+======================= */
+
 .login-error {
     margin-top: .8rem;
     color: #ef4444;
     font-size: .9rem;
 }
 
-/* FOOTER */
+/* =======================
+   FOOTER
+======================= */
+
 .auth-footer {
     margin-top: 1.3rem;
+
     display: flex;
     justify-content: center;
     align-items: center;
     gap: .4rem;
+
     font-size: .95rem;
     color: var(--text-secondary);
 }
@@ -254,8 +309,10 @@ body.dark {
 .link-btn {
     background: none;
     border: none;
+
     color: var(--primary);
     font-weight: 600;
+
     cursor: pointer;
 }
 
@@ -263,27 +320,49 @@ body.dark {
     text-decoration: underline;
 }
 
-.theme-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+/* =======================
+   DESKTOP
+======================= */
 
-    position: absolute;
-    top: 20px;
-    right: 20px;
+@media (min-width: 1300px) {
 
-    padding: .5rem .8rem;
-    border-radius: 10px;
+    .main-container {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 70%;
 
-    border: 1px solid var(--border);
-    background: var(--card-bg);
-    color: var(--text);
+        padding: 5rem 8% 2rem;
+        gap: 5rem;
+        align-items: flex-start;
 
-    font-size: .9rem;
-    cursor: pointer;
-    transition: .2s;
-}
+        border-left: 1px solid var(--side-border);
+        border-right: 1px solid var(--side-border);
+    }
 
-.theme-btn:hover {
-    background: var(--bg);
+    .login-header h1 {
+        font-size: 3.2rem;
+    }
+
+    .login-container form {
+        padding: 2rem;
+    }
+
+    /* BOTÓN TEMA FUERA DEL FLUJO */
+    .theme-btn {
+        position: fixed;
+        top: 1.2rem;
+        right: 1.2rem;
+
+        width: auto;
+        height: auto;
+
+        border-radius: 10px;
+        border: 1px solid var(--border);
+
+        padding: .5rem .75rem;
+    }
+
+    .theme-text {
+        display: inline;
+    }
 }

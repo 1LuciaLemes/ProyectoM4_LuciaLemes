@@ -6,8 +6,9 @@ import { db } from "../services/firebase";
 import getTasksByUser from "../services/tasks";
 
 
-function useTasks(userId?: string) {
+function useTasks(userId: string | undefined) {
     const [tasks, setTasks] = useState<TasksProps[]>([]);
+    const [loading, setLoading] = useState(false);
 
     // cargar las tareas cuando cambio de usuario
     // uso useEffect porque traerlas de firestone es un efecto secundario (sE)
@@ -15,8 +16,14 @@ function useTasks(userId?: string) {
         if (!userId) return;
 
         async function loadTasks() {
-            const data = await getTasksByUser(userId);
-            setTasks(data);
+            setLoading(true);
+
+            try {
+                const data = await getTasksByUser(userId);
+                setTasks(data);
+            } finally {
+                setLoading(false);
+            }
         }
 
         loadTasks();
@@ -48,6 +55,8 @@ function useTasks(userId?: string) {
             description: task.description
         });
 
+        if (!userId) return;
+
         const data = await getTasksByUser(userId);
         setTasks(data);
     }
@@ -57,6 +66,8 @@ function useTasks(userId?: string) {
         const taskRef = doc(db, "tasks", taskId);
 
         await deleteDoc(taskRef);
+
+        if (!userId) return;
 
         const data = await getTasksByUser(userId);
         setTasks(data);
@@ -72,12 +83,15 @@ function useTasks(userId?: string) {
             completed: !task.completed
         });
 
+        if (!userId) return;
+
         const data = await getTasksByUser(userId);
         setTasks(data);
     }
 
     return {
         tasks,
+        loading,
         addTask,
         editTask,
         toggleTaskStatus,
