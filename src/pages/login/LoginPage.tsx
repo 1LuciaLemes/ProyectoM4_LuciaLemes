@@ -22,7 +22,9 @@ function LoginPage(): JSX.Element {
             await signIn(email, password);
             navigate("/tasks");
         } catch (error) {
-            switch (error.code) {
+            const err = error as { code?: string };
+
+            switch (err.code) {
                 case "auth/invalid-credential":
                 case "auth/wrong-password":
                 case "auth/user-not-found":
@@ -31,7 +33,7 @@ function LoginPage(): JSX.Element {
 
                 default:
                     setError("No fue posible iniciar sesión.");
-                    return
+                    return;
             }
         }
     }
@@ -42,7 +44,9 @@ function LoginPage(): JSX.Element {
             await signUp(email, password, name);
             navigate("/tasks");
         } catch (error) {
-            switch (error.code) {
+            const err = error as { code?: string };
+
+            switch (err.code) {
                 case "auth/email-already-in-use":
                     setError("Ya existe un usuario con ese correo.");
                     return
