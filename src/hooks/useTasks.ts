@@ -19,7 +19,7 @@ function useTasks(userId?: string) {
             setLoading(true);
 
             try {
-                const data = await getTasksByUser(userId);
+                const data = await getTasksByUser(userId!);
                 setTasks(data);
             } finally {
                 setLoading(false);
