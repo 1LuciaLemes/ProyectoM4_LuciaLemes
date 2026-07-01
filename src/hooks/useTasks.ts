@@ -6,7 +6,7 @@ import { db } from "../services/firebase";
 import getTasksByUser from "../services/tasks";
 
 
-function useTasks(userId: string) {
+function useTasks(userId?: string) {
     const [tasks, setTasks] = useState<TasksProps[]>([]);
     const [loading, setLoading] = useState(false);
 

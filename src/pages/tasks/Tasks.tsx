@@ -101,10 +101,12 @@ function Tasks(): JSX.Element {
                         <p>Hola {name}</p>
                     </div>
 
-                    <EmailSummaryButton
-                        todos={tasks}
-                        userEmail={user!.email!}
-                    />
+                    {user?.email && (
+                        <EmailSummaryButton
+                            todos={tasks}
+                            userEmail={user.email}
+                        />
+                    )}
                 </div>
                 <button
                     className="btn-add-task"
