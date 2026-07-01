@@ -27,7 +27,8 @@ function Tasks(): JSX.Element {
 
     const name = user?.displayName || user?.email?.split("@")[0];
 
-    const { tasks, loading, addTask, editTask, deleteTask, toggleTaskStatus } = useTasks(user?.uid);
+    const userId = user?.uid;
+    const { tasks, loading, addTask, editTask, deleteTask, toggleTaskStatus } = useTasks(userId);
 
     // estado para mostrar el formulario solo si: Quiero agregar tarea / Quiero editar tarea
     const [showForm, setShowForm] = useState(false);
@@ -43,7 +44,7 @@ function Tasks(): JSX.Element {
 
     // handler para que reconozca si lo que quiero hacer es editar o crear tarea
     // si hay una tarea a editar, la actualiza, sino creo una nueva
-    function handleSubmit(title: string, description: string) {
+    function handleSubmit(title: string, description?: string) {
         if (taskToEdit) {
             editTask({
                 ...taskToEdit,
