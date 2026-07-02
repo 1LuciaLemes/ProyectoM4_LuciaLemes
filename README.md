@@ -28,13 +28,13 @@ A continuación se proporciona la representación visual de la App:
 ### 1. Versión desktop:
 Se representan en orden: login, tasks page y formulario agregar nueva tarea.
 
-![Login de la app versión desktop](/react-pi/DocsIMG/login.png)
-![Tasks más el formulario para agregar task](/react-pi/DocsIMG/tasks_formtasks.png)
+![Login de la app versión desktop](/DocsIMG/login.png)
+![Tasks más el formulario para agregar task](/DocsIMG/tasks_formtasks.png)
 
 ### 2. Versión mobile:
 Se representan en orden: login, tasks page y formulario agregar nueva tarea.
 
-![Versión mobile](/react-pi/DocsIMG/mobile.png)
+![Versión mobile](/DocsIMG/mobile.png)
 
 [⬆ Volver al inicio](#proyecto-integrador-4)
 
