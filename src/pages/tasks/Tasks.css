@@ -515,3 +515,12 @@
         padding: .55rem .9rem;
     }
 }
+
+/* ENVIO DEL CORREO ELECTRONICO */
+.text-email-succes {
+    color: rgb(48, 177, 48);
+}
+
+.text-email-error {
+    color: rgb(211, 50, 50);
+}

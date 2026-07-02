@@ -22,7 +22,7 @@ function Tasks(): JSX.Element {
 
     async function handleLogout(): Promise<void> {
         await logout();
-        navigate("/");
+        navigate("/", { replace: true });
     }
 
     const name = user?.displayName || user?.email?.split("@")[0];

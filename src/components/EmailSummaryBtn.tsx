@@ -65,13 +65,13 @@ function EmailSummaryButton({
             </button>
 
             {status === "success" && (
-                <p style={{ color: "green" }}>
+                <p className="text-email-succes">
                     ¡Resumen enviado correctamente!
                 </p>
             )}
 
             {status === "error" && (
-                <p style={{ color: "red" }}>
+                <p className="text-email-error">
                     {errorMsg}
                 </p>
             )}
