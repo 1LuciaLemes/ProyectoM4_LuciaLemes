@@ -241,4 +241,4 @@ A continuación se proporciona la URL para ver el proyecto en Vercel: https://pr
 [⬆ Volver al inicio](#proyecto-integrador-4)
 
 ## Documentación de IA
-En el siguiente markdown se proporciona la información de la IA utilizada. [Enlace a la documentación de IA](/react-pi/DOCIA.md)
+En el siguiente markdown se proporciona la información de la IA utilizada. [Enlace a la documentación de IA](/DOCIA.md)
